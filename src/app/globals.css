@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
+/* ===============================
+   Tokens (Tailwind v4 via @theme)
+   =============================== */
+@theme {
+  /* Paleta azul */
+  --color-brand-950: #021024;
+  --color-brand-900: #052659;
+  --color-brand-500: #5483B3;
+  --color-brand-300: #7DA0CA;
+  --color-brand-200: #C1E8FF;
+
+  /* Tipografía */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* ===============================
+   Tema por defecto (LIGHT) — estilo Notion
+   =============================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  /* Fondo y texto */
+  --bg: #ffffff;                 /* blanco puro */
+  --fg: #0b1220;                 /* slate casi negro */
+  --muted: #64748b;
+
+  /* Superficies (cards) — blanco sutilmente distinto */
+  --surface: #fbfbfd;            /* card (blanco muy leve, distinto al bg) */
+  --surface-2: #f4f6f8;          /* para variaciones */
+
+  /* Bordes / sombras */
+  --stroke: rgba(2,16,36,.08);
+  --stroke-2: rgba(2,16,36,.16);
+  --ring: rgba(84,131,179,.35);
+  --shadow-1: 0 1px 2px rgba(2,16,36,.04), 0 1px 1px rgba(2,16,36,.02);
+  --shadow-2: 0 10px 24px rgba(2,16,36,.08);
+
+    --accent: #bc9b74;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* ===============================
+   Tema DARK — fondo negro + cards un poco más claras
+   =============================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+
+    /* Fondo negro “app” y texto */
+    --bg: #0b0b0f;               /* negro profundo (no #000 para evitar banding) */
+    --fg: #ffffff;
+    --muted: rgba(255,255,255,.70);
+
+    /* Cards ligeramente más claras que el fondo */
+    --surface: #14161c;          /* card (negro +6~8% luminancia) */
+    --surface-2: #1a1d25;        /* variante un paso más clara */
+
+    /* Bordes / sombras */
+    --stroke: rgba(255,255,255,.10);
+    --stroke-2: rgba(255,255,255,.18);
+    --ring: rgba(193,232,255,.35);
+    --shadow-1: 0 1px 2px rgba(0,0,0,.45);
+    --shadow-2: 0 14px 30px rgba(0,0,0,.55);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===============================
+   Base
+   =============================== */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+html { scroll-behavior: smooth; }
+
+/* halo suave solo en light; en dark mantenemos plano tipo screenshot */
+body {
+  background-image:
+    radial-gradient(1200px 520px at 50% -220px,
+      color-mix(in oklab, var(--color-brand-200) 16%, transparent),
+      transparent 60%);
+  background-repeat: no-repeat;
+}
+@media (prefers-color-scheme: dark) {
+  body { background-image: none; }
+}
+
+/* contenedor Notion-like */
+.container {
+  max-width: 1024px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+/* ===============================
+   Utilidades UI (reusables)
+   =============================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  box-shadow: var(--shadow-1);
+}
+.card-lg { border-radius: 22px; }
+.card-hover { transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease; }
+.card-hover:hover { border-color: var(--stroke-2); box-shadow: var(--shadow-2); transform: translateY(-1px); }
+
+.badge {
+  display: inline-flex; align-items: center; height: 28px; padding-inline: 10px;
+  border: 1px solid var(--stroke); border-radius: 999px; background: var(--surface);
+  font-size: 12px; gap: 6px;
+}
+.pill {
+  display: inline-flex; align-items: center; padding: 8px 10px; gap: 6px;
+  border-radius: 999px; border: 1px solid var(--stroke); background: var(--surface);
+  font-size: 12px; line-height: 1;
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 44px; padding-inline: 16px; gap: 8px;
+  border-radius: 12px; border: 1px solid var(--stroke);
+  background: var(--surface);
+  transition: border-color .15s, background-color .15s, box-shadow .15s;
+}
+.btn:hover { border-color: var(--stroke-2); }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ring); }
+.btn-primary { background: var(--color-brand-500); color: white; border-color: transparent; }
+.btn-primary:hover { background: var(--color-brand-300); }
+
+/* -------- Section spacing (especificidad baja) -------- */
+:where(.section) { padding-block: 56px; }   /* antes: .section { ... } */
+
+/* -------- Utilidades -------- */
+.section-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.subtle { color: var(--muted); }
+.hr { height: 1px; background: var(--stroke); border: none; }
+/* ===============================
+   Accent minimal (#bc9b74)
+   =============================== */
+
+.hr-accent {
+  height: 1px;
+  background: var(--accent);
+  border: none;
+  opacity: 0.4;   /* sutil */
+  margin-block: 12px;
+}
+
+.badge-accent {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.pill-accent {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.card-hover:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+}
+
+/* Botón con acento dorado */
+.btn-accent {
+  background: var(--accent);
+  color: #111;            /* buen contraste en light y dark */
+  border-color: transparent;
+}
+.btn-accent:hover { filter: brightness(1.06); }
+.btn-accent:focus-visible { box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 45%, transparent); }
