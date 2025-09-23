@@ -24,7 +24,7 @@ export default function HeroIntro({
         <Card className="card-lg p-5 flex items-center justify-center card-hover">
           <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border border-[var(--stroke)] bg-[var(--surface-2)]">
             <Image
-              src="/images/avatar.jpg"
+              src="/images/image.png"
               alt={`Portrait of ${name}`}
               fill
               sizes="(max-width: 768px) 160px, 192px"
