@@ -7,10 +7,19 @@ type PillProps = {
 };
 
 export default function Pill({ children, href, className = "" }: PillProps) {
-  const Cmp: any = href ? "a" : "span";
-  return (
-    <Cmp href={href} className={`pill ${className}`}>
-      {children}
-    </Cmp>
-  );
+  if (href) {
+    const external = href.startsWith("http");
+    return (
+      <a
+        href={href}
+        className={`pill ${className}`}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return <span className={`pill ${className}`}>{children}</span>;
 }
