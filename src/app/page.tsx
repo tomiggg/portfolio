@@ -77,7 +77,7 @@ export default function HomePage() {
               <ProjectCard
                 title="Personal Dashboard"
                 subtitle="Full-Stack — Coming soon"
-                href="#"
+                href="https://tu-utn.vercel.app"
                 imageSrc="/images/projects/dashboard-preview.jpg"
               />
             </div>

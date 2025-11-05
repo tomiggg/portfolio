@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Portfolio personal",
+  icons: { icon: [{ url: "/favicon.ico?v=4", sizes: "any" }] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
