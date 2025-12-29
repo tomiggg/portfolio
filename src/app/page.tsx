@@ -74,6 +74,14 @@ export default function HomePage() {
                 imageSrc="/images/projects/pascuali-preview.jpg"
               />
 
+                <ProjectCard
+                  title="Orbit Studio"
+                  subtitle="Creative software & web studio"
+                  href="https://orbit-studio-six.vercel.app/"
+                  imageSrc="/images/projects/orbit-studio-preview.jpg"
+                />
+              
+
               <ProjectCard
                 title="Personal Dashboard"
                 subtitle="Full-Stack — Coming soon"
