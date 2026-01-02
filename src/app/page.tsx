@@ -75,7 +75,7 @@ export default function HomePage() {
               />
 
                 <ProjectCard
-                  title="Orbit Studio"
+                  title="Shift Studio"
                   subtitle="Creative software & web studio"
                   href="https://orbit-studio-six.vercel.app/"
                   imageSrc="/images/projects/orbit-studio-preview.jpg"
