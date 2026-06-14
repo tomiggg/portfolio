@@ -78,7 +78,7 @@ export default function HomePage() {
                   title="Shift Studio"
                   subtitle="Creative software & web studio"
                   href="https://orbit-studio-six.vercel.app/"
-                  imageSrc="/images/projects/orbit-studio-preview.jpg"
+                  imageSrc="/images/projects/Xnip2026-06-13_22-06-48.jpg"
                 />
               
 
